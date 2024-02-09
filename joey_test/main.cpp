@@ -16,9 +16,13 @@ void showBasicTypes() {
 }
 
 void dynamicMemoryAllocation() {
-    int* ptr = new int(10);
-    cout << "Dynamically allocated integer: " << *ptr << endl;
-    delete ptr;
+    int userInput;
+    cout << "INPUT: Enter an integer (whole number)";
+    cin >> userInput;
+    
+    int* userPtr = new int(userInput);
+    cout << "Dynamically allocated integer: " << *userPtr << "\nAt Memory Location: " << &userPtr << "\n" << endl;
+    delete userPtr;
 }
 
 void showSTLContainers() {
@@ -54,7 +58,7 @@ void displayMemoryContent(int* array, int size) {
         cout << "&array[" << i << "]: " << (void*)&array[i] << " (value: " << array[i] << ")\n";
     }
 
-    cout << "\nEnter the index of the array element to view its memory content (or -1 to exit): ";
+    cout << "\nINPUT: Enter the index of the array element to view its memory content (or -1 to exit): ";
     while (true) {
         cin >> choice;
         if (choice == -1) {
@@ -90,7 +94,7 @@ int main() {
         cout << "5. Class and Object\n";
         cout << "6. View Memory Locations\n";
         cout << "0. Exit\n";
-        cout << "Enter your choice: ";
+        cout << "INPUT: Enter your choice: ";
         cin >> choice;
 
         // User Input
