@@ -79,6 +79,19 @@ public:
     void display() {
         cout << "SampleClass display method." << endl;
     }
+    
+    // Set the variable's value
+    void setValue(int newValue) {
+        this->value = newValue;
+    }
+    
+    // Get the private variable's value
+    int getValue() {
+        return this->value;
+    }
+    
+private:
+    int value;
 };
 
 int main() {
@@ -119,7 +132,12 @@ int main() {
             case 5: {
                 // Object Oriented Programming Showcase
                 SampleClass obj;
+                int userValue;
                 obj.display();
+                cout << "Set the value for the class: " << endl;
+                cin >> userValue;
+                obj.setValue(userValue);
+                cout << "The new value is: " << obj.getValue() << "." << endl;
                 break; }
             case 6: {
                 // Display Memory Content
