@@ -4,6 +4,20 @@
 
 using namespace std;
 
+// namespace First
+namespace First {
+    int value() { return 5; }
+}
+// end namespace First
+
+// namespace Second
+namespace Second {
+    const double x = 100;
+    double value() { return 2*x; }
+}
+// end namespace Second
+
+
 /*
  * showBasicTypes: Shows different vaible types in C++
  * @return None
@@ -13,6 +27,13 @@ void showBasicTypes() {
     float b = 3.14;
     char c = 'A';
     cout << "Integer: " << a << ", Float: " << b << ", Char: " << c << endl;
+}
+
+void showNamespaces() {
+    std::cout << "First::value: " << First::value() << std::endl;
+        
+        // Access value in namespace Second
+    std::cout << "Second::value: " << Second::value() << std::endl;
 }
 
 void dynamicMemoryAllocation() {
@@ -26,15 +47,39 @@ void dynamicMemoryAllocation() {
 }
 
 void showSTLContainers() {
-    vector<int> vec = {1, 2, 3, 4, 5};
+    char userInput;
+    
+    vector<int> vec;
     map<string, int> mp = {{"apple", 1}, {"banana", 2}};
-
-    cout << "Vector elements: ";
-    for(int n : vec) {
-        cout << n << " ";
+    
+    do {
+        cout << "Do you want to insert your own vector elements? y/n" << endl;
+        cin >> userInput;
+    } while ((userInput != 'y' ) && (userInput != 'n'));
+    
+    signed int track_number = 0;
+    if (userInput == 'y') {
+        int userInput2;
+        while (true) {
+            cout << "Enter elment #" << track_number << ". Type -1 to exit." << endl;
+            cin >> userInput2;
+            if (userInput2 == -1) {
+                break; // leave loop user input
+            }
+            vec.push_back(userInput2);
+            
+        }
+        
+        // Display vector
+        cout << "Vector elements: ";
+        for(int n : vec) {
+            cout << n << " ";
+        }
+        cout << endl;
+    } else {
+        cout << "No vector inputs" << endl;
     }
-    cout << endl;
-
+        
     cout << "Map elements: ";
     for(const auto& pair : mp) {
         cout << "[" << pair.first << " => " << pair.second << "] ";
@@ -106,6 +151,7 @@ int main() {
         cout << "4. Function Overloading\n";
         cout << "5. Class and Object\n";
         cout << "6. View Memory Locations\n";
+        cout << "7. Namespaces\n";
         cout << "0. Exit\n";
         cout << "INPUT: Enter your choice: ";
         cin >> choice;
@@ -146,6 +192,10 @@ int main() {
                 
                 displayMemoryContent(myArray, SIZE);
                 break; }
+            case 7: {
+                showNamespaces();
+                break;
+            }
             case 0: {
                 cout << "Exiting program." << endl;
                 break; }
