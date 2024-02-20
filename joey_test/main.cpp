@@ -7,6 +7,10 @@ using namespace std;
 // namespace First
 namespace First {
     int value() { return 5; }
+
+    namespace FirstNext {
+        int value() { return 6; }
+    }
 }
 // end namespace First
 
@@ -30,10 +34,15 @@ void showBasicTypes() {
 }
 
 void showNamespaces() {
+    
+    // Access in namespace First
     std::cout << "First::value: " << First::value() << std::endl;
         
-        // Access value in namespace Second
+    // Access value in namespace Second
     std::cout << "Second::value: " << Second::value() << std::endl;
+    
+    
+    std::cout << "First::FirstNext::value: " << First::FirstNext::value() << std::endl;
 }
 
 void dynamicMemoryAllocation() {
@@ -139,6 +148,38 @@ private:
     int value;
 };
 
+class Point {
+public:
+    int x, y;
+    
+    Point(int x, int y) : x(x), y(y) {}
+    
+    Point operator+(const Point& other) {
+        return Point(x + other.x, y + other.y);
+    }
+    
+    Point operator-(const Point& other) {
+        return Point(x - other.x, y - other.y);
+    }
+    
+    Point operator*(const Point& other) {
+        return Point(x * other.x, y * other.y);
+    }
+    
+    Point operator%(const Point& other) {
+        return Point(int(x % other.x), int(y % other.y));
+    }
+    
+    void print() { cout << "(" << x << ", " << y << ")"; }
+    
+    friend ostream& operator<<(ostream& os, const Point& p);
+};
+
+// Overloading the 'vv' operator to print a Point
+ostream& operator<<(ostream& os, const Point& p) {
+    os << "(" << p.x << ", " << p.y << ")";
+    return os;
+}
 int main() {
     int choice;
 
@@ -152,6 +193,7 @@ int main() {
         cout << "5. Class and Object\n";
         cout << "6. View Memory Locations\n";
         cout << "7. Namespaces\n";
+        cout << "8. Operator Overloading\n";
         cout << "0. Exit\n";
         cout << "INPUT: Enter your choice: ";
         cin >> choice;
@@ -194,6 +236,28 @@ int main() {
                 break; }
             case 7: {
                 showNamespaces();
+                break;
+            }
+            case 8: {
+                Point p1(1,2);
+                Point p2(3,4);
+                
+                Point sum = p1 + p2;
+                Point sub = p1 - p2;
+                Point multiplication = p1 * p2;
+                
+                // Display points to user
+                cout << "Point 1: " << p1 << endl;
+                cout << "point 2: " << p2 << endl;
+                
+                // Cout overloading
+                cout << "Sum: " << sum << endl;
+                cout << "Sub: " << sub << endl;
+                
+                // Using print method
+                cout << "Multiplication:";
+                //multiplication.print();
+                cout << endl;
                 break;
             }
             case 0: {
